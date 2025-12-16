@@ -20,6 +20,18 @@ export const App: React.FC = () => {
 
   const hasSelectedGood = selectedGood !== '';
 
+  const handleClearSelection = () => {
+    setSelectedGood('');
+  };
+
+  const handleSelectGood = (event: React.MouseEvent<HTMLButtonElement>) => {
+    const good = event.currentTarget.dataset.good;
+
+    if (good) {
+      setSelectedGood(good);
+    }
+  };
+
   return (
     <main className="section container">
       {hasSelectedGood ? (
@@ -30,7 +42,7 @@ export const App: React.FC = () => {
             data-cy="ClearButton"
             type="button"
             className="delete ml-3"
-            onClick={() => setSelectedGood('')}
+            onClick={handleClearSelection}
           />
         </h1>
       ) : (
@@ -54,7 +66,8 @@ export const App: React.FC = () => {
                       data-cy="AddButton"
                       type="button"
                       className="button"
-                      onClick={() => setSelectedGood(good)}
+                      data-good={good}
+                      onClick={handleSelectGood}
                     >
                       +
                     </button>
@@ -65,7 +78,7 @@ export const App: React.FC = () => {
                       data-cy="RemoveButton"
                       type="button"
                       className="button is-info"
-                      onClick={() => setSelectedGood('')}
+                      onClick={handleClearSelection}
                     >
                       -
                     </button>
